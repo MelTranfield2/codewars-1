@@ -22,11 +22,6 @@ namespace PrimeService;
 //     return 
 // }
 
-// public string SubtractSum(int number)
-// {
-//     return "apple";
-// }
-
 public class SubtractSums
 {
     public string SubtractSum(int number)

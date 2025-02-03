@@ -21,34 +21,43 @@ namespace PrimeService
             // try/catch, if to prevent 3 identical symbols in a row
             // loop through every value
 
-            Dictionary<int, string> romanNumerals = new() 
+            //DESCENDING ORDER
+            Dictionary<int, string> romanNumerals = new()
             {
-                [1] = "I",
-                [5] = "V",
-                [10] = "X",
-                [50] = "L",
-                [100] = "C",
+                [1000] = "M",
+                [900] = "CM",
                 [500] = "D",
-                [1000] = "M"
+                [400] = "CD",
+                [100] = "C",
+                [90] = "XC",
+                [50] = "L",
+                [40] = "XL",
+                [10] = "X",
+                [9] = "IX",
+                [5] = "V",
+                [4] = "IV",
+                [1] = "I"
             };
 
-            if (number > 1 && number < 3999) {
-
-
-            } else {
-
+            if (number < 1 || number > 3999)
+            {
+                throw new InvalidDataException("Number is invalid");
             }
 
             string result = "";
-            
-            for (int i = 0; i < number. ; i++)
-            {
 
+
+
+            foreach (KeyValuePair<int, string> pair in romanNumerals)
+            {
+                while (number >= pair.Key)
+                {
+                    result += pair.Value;
+                    number -= pair.Key;
+                }
 
             }
-
-            return
-
+            return result;
         }
     }
 }
