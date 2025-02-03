@@ -1,0 +1,10 @@
+# Build outputs
+bin/
+obj/
+
+# macOS system files
+.DS_Store
+
+# IDE files
+.vs/
+.vscode/
