@@ -16,5 +16,14 @@ namespace PrimeService.Tests
             Assert.Equal(1, result);
         }
 
+        [Fact]
+        public void returnCorrectNonNegativeIntOr0()
+        {
+            TransformToPrime transformToPrime = new TransformToPrime();
+            int[] numbers = [5, 2];
+            int result = transformToPrime.transformArrayToPrime(numbers);
+            Assert.Equal(0, result);
+        }
+
     }
 }
