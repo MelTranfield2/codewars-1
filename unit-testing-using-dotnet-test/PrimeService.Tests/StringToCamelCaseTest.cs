@@ -7,13 +7,31 @@ namespace PrimeService.Tests
 {
     public class StringToCamelCaseTest
     {
+
+        StringToCamelCase stringToCamelCase = new StringToCamelCase();
+
         [Fact]
         public void returnCorrectCamelCaseString()
         {
-            StringToCamelCase stringToCamelCase = new StringToCamelCase();
             String snakeCase = "the_stealth_warrior";
-            int result = stringToCamelCase.convertToCamelCase(snakeCase);
+            string result = stringToCamelCase.ConvertToCamelCase(snakeCase);
             Assert.Equal("theStealthWarrior", result);
+        }
+
+        [Fact]
+        public void returnCorrectCamelCaseStringHyphens()
+        {
+            String hyphensString = "The-Stealth-Warrior";
+            string result = stringToCamelCase.ConvertToCamelCase(hyphensString);
+            Assert.Equal("TheStealthWarrior", result);
+        }
+
+        [Fact]
+        public void returnCorrectCamelCaseStringHyphenUnderscore()
+        {
+            String hyphensUnderscoreString = "The-Stealth_Warrior";
+            string result = stringToCamelCase.ConvertToCamelCase(hyphensUnderscoreString);
+            Assert.Equal("TheStealthWarrior", result);
         }
     }
 }
