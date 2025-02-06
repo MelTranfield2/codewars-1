@@ -37,25 +37,13 @@ namespace PrimeService
 
         public String RevRot(string strng, int sz)
         {
-            var strngChunks = strng.Select((x, i) => i)
-            .Where(i => i % sz == 0)
-            .Select(i => String.Concat(strng.Skip(i).Take(sz))).ToList();
-
-            var result = new StringBuilder();
-
-            foreach (var s in strngChunks)
-            {
-                int sumOfSDigits = s.Sum(c => c - '0');
-                if (sumOfSDigits % 2 != 0)
-                {
-                    result.Append(shiftChunkToLeft(s));
-                }
-                else
-                {
-                    result.Append(reverseChunk(s));
-                }
-            }
-            return result.ToString();
+            return string.Join("",
+            strng.Chunk(sz)
+            .Where(chunk => chunk.Length == sz)
+            .Select(chunk =>
+               chunk.Sum(c => c - '0') % 2 != 0
+                   ? shiftChunkToLeft(chunk)
+                   : reverseChunk(chunk)));
         }
 
         public string shiftChunkToLeft(IEnumerable<char> chunk)
