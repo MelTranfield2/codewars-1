@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrimeService
+{
+    public class ReverseOrRotate
+    {
+        // The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string) of size sz (ignore the last chunk if its size is less than sz).
+
+        // If the sum of a chunk's digits is divisible by 2, reverse that chunk; otherwise rotate it to the left by one position. Put together these modified chunks and return the result as a string.
+
+
+        // If sz is <= 0 or if str == "" return ""
+        // sz is greater (>) than the length of str it is impossible to take a chunk of size sz hence return "".
+        // Examples:
+        // ("123456987654", 6) --> "234561876549"
+        // ("123456987653", 6) --> "234561356789"
+        // ("66443875", 4) --> "44668753"
+        // ("66443875", 8) --> "64438756"
+        // ("664438769", 8) --> "67834466"
+        // ("123456779", 8) --> "23456771"
+        // ("", 8) --> ""
+        // ("123456779", 0) --> "" 
+        // ("563000655734469485", 4) --> "0365065073456944"
+        // Example of a string rotated to the left by one position:
+        // s = "123456" gives "234561".
+
+        //What are we doing in English?
+        //Steps: cut string into chunks
+        //check if the sum of each chunk's digits is divisible by 2
+        //if it is, then reverse that chunk, otherwise rotate it to the left by one
+        //put the modified chunks together, concatenate them and then return result as a string
+
+        public String RevRot(string strng, int sz)
+        {
+            var strngChunks = strng.Select((x, i) => i)
+            .Where(i => i % sz == 0)
+            .Select(i => String.Concat(strng.Skip(i).Take(sz))).ToList();
+
+            var result = new StringBuilder();
+
+            foreach (var s in strngChunks)
+            {
+                int sumOfSDigits = s.Sum(c => c - '0');
+                if (sumOfSDigits % 2 != 0)
+                {
+                    result.Append(shiftChunkToLeft(s));
+                }
+                else
+                {
+                    result.Append(reverseChunk(s));
+                }
+            }
+            return result.ToString();
+        }
+
+        public string shiftChunkToLeft(IEnumerable<char> chunk)
+        {
+            return new string(chunk.Skip(1).Concat(chunk.Take(1)).ToArray());
+        }
+
+        public string reverseChunk(IEnumerable<char> chunk)
+        {
+            char[] charArray = chunk.ToArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+    }
+}
