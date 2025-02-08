@@ -24,5 +24,13 @@ namespace PrimeService.Tests
             var result = stringAverage.findAverage(inputString);
             Assert.Equal("N/A", result);
         }
+
+        [Fact]
+        public void ShouldReturnNAIfContainsNumberGreaterThan9()
+        {
+            string inputString = "five ten";
+            var result = stringAverage.findAverage(inputString);
+            Assert.Equal("N/A", result);
+        }
     }
 }
