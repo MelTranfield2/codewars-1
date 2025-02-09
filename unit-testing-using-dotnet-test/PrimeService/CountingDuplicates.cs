@@ -14,7 +14,6 @@ namespace PrimeService
         public int getDuplicates(string inputString)
         {
             //iterate through, do contains check in LINQ or Any
-            int countDuplicates = 0;
             var chars = inputString.ToLower();
             var nonDuplicates = chars.Distinct();
 
