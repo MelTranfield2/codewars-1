@@ -15,13 +15,12 @@ namespace PrimeService
         {
             //iterate through, do contains check in LINQ or Any
             int countDuplicates = 0;
-            var nonDuplicates = inputString.Distinct();
-            var chars = inputString;
-            if (chars.Any(ch => !nonDuplicates.Contains(ch)))
-            {
-                countDuplicates = inputString.Length - nonDuplicates.Count();
-            }
-            return countDuplicates;
+            var chars = inputString.ToLower();
+            var nonDuplicates = chars.Distinct();
+
+            var duplicateGroups = chars.GroupBy(ch => ch)
+            .Where(gr => gr.Count() > 1);
+            return duplicateGroups.Count();
         }
     }
 }
