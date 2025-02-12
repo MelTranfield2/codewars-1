@@ -21,11 +21,25 @@ namespace PrimeService
 
         public IEnumerable<T> returnOrder<T>(IEnumerable<T> iterable)
         {
-            HashSet<T> noDuplicates = new HashSet<T>();
+            List<T> noDuplicates = new List<T>();
 
-            foreach (T i in iterable)
+            T[] iterableArray = iterable.ToArray();
+
+            if (!iterableArray.Any() || iterableArray.Length == 0)
             {
-                noDuplicates.Add(i);
+                return new List<T>();
+            }
+
+            noDuplicates.Add(iterableArray[0]);
+
+            for (int i = 1; i < iterableArray.Length; i++)
+            {
+                var prevChar = iterableArray[i - 1];
+                var currentChar = iterableArray[i];
+                if (!currentChar.Equals(prevChar))
+                {
+                    noDuplicates.Add(iterableArray[i]);
+                }
             }
             return noDuplicates;
         }

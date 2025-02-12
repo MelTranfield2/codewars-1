@@ -17,5 +17,13 @@ namespace PrimeService.Tests
             var result = uniqueInOrder.returnOrder(iterable.ToCharArray());
             Assert.Equal("", string.Join("", result));
         }
+
+        [Fact]
+        public void ShouldBeCorrectString()
+        {
+            string iterable = "AAAABBBCCDAABBB";
+            var result = uniqueInOrder.returnOrder(iterable.ToCharArray());
+            Assert.Equal("ABCDAB", string.Join("", result));
+        }
     }
 }
