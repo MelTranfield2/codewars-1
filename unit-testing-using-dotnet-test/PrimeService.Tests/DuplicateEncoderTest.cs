@@ -16,5 +16,14 @@ namespace PrimeService.Tests
             var result = duplicateEncoder.DuplicateEncode(word);
             Assert.Equal("(((", result);
         }
+
+
+        [Fact]
+        public void ShouldBeAlternating()
+        {
+            string word = "recede";
+            var result = duplicateEncoder.DuplicateEncode(word);
+            Assert.Equal("()()()", result);
+        }
     }
 }

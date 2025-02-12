@@ -14,24 +14,24 @@ namespace PrimeService
 
         public string DuplicateEncode(string word)
         {
-            StringBuilder newWord = new StringBuilder();
 
-            if (!word.Any() || word.Length == 0)
+            StringBuilder newWord = new StringBuilder();
+            string wordLowercase = word.ToLower();
+
+            if (string.IsNullOrEmpty(wordLowercase))
             {
                 return "";
             }
 
-            char previous = word[0];
-
-            foreach (char w in word)
+            foreach (char current in wordLowercase)
             {
-                if (!word.Equals(previous))
+                if (wordLowercase.Count(c => c == current) > 1)
                 {
-                    newWord.Append("(");
+                    newWord.Append(")");
                 }
                 else
                 {
-                    newWord.Append(")");
+                    newWord.Append("(");
                 }
             }
             return newWord.ToString();
